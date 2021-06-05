@@ -1,0 +1,199 @@
+*{margin: 0; padding: 0;}
+html{height: 100%;}
+body{font-family: "Trebuchet MS", tahoma, arial; font-weight: 200;}
+
+.bg-base{
+	background: url("../img/layout-bg.jpg");
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+.bg-cadastro{background: linear-gradient(rgba(91, 239, 155, 0.7), rgba(0, 115, 157, 0.7), rgba(0, 115, 157, 0.7)), url("../img/business-options-loan.jpg"); background-size: cover; background-position: right}
+.bg-login{background: linear-gradient(rgba(42, 0, 104, 0.7), rgba(0, 115, 157, 0.7), rgba(91, 173, 239, 0.7)), url("../img/business-options-loan.jpg"); background-size: cover; background-position: right}
+
+.logo-dna{width: 120px; margin: 20px auto}
+.logo-dna img{width: 120px;}
+.logo-dna-login{margin: 20px auto; display: flex;}
+.logo-dna-login img{
+	margin: 0 auto;
+	width: 200px;
+}
+.erros, .ok, .download, .alerta{
+	width: 390px;
+	padding: 5px;
+	margin: 20px auto 0 auto;
+	border-radius: 4px;
+	color: white;
+	text-align: center;
+}
+
+.ok{
+	background: white;
+	padding: 10px 30px;
+	color: #333;
+}
+
+.alerta{
+	background: red;
+	color: white;
+}
+
+.download{background: rgba(165, 43, 232, 0.9); text-decoration: none}
+.download a{text-decoration: none; color: white; font-weight: bold; text-transform: uppercase; font-weight: bold}
+
+#formulario, #dnaformkt-trilha{
+	max-width: 700px;
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	padding: 10px;
+}
+
+#formulario h2, #formulario h3, #formulario,
+#dnaformkt-trilha h2, #dnaformkt-trilha h3, #dnaformkt-trilha h1{
+	font: 17px "Trebuchet", tahoma, arial;
+	font-weight: bold;
+	color: #0a1936;
+	text-align: left;
+	margin: 10px auto;
+}
+#formulario h3, #dnaformkt-trilha h3{color: black; font-size: 14px; margin: 10px 0;}
+#formulario fieldset h3, #dnaformkt-trilha fieldset h3{font-weight: normal;}
+#formulario h1, #formulario h4,
+#dnaformkt-trilha h1, #dnaformkt-trilha h4{text-align: center;}
+#formulario fieldset,
+#dnaformkt-trilha fieldset{
+	background: #fdfdfd;
+	border: 0 none;
+	border-radius: 30px;
+	-moz-border-radius:30px;
+	-webkit-border-radius:30px;	
+	padding: 20px 50px;	
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+	position: relative;
+}
+
+/*Aplicar essa formatação, exceto no primeiro fieldset*/
+#formulario fieldset:not(:first-of-type),
+#dnaformkt-trilha fieldset:not(:first-of-type){
+	display: none;
+}
+
+#formulario input, #formulario textarea, button,
+#dnaformkt-trilha input{
+	padding: 10px;
+	border: 1px solid rgba(38,128,101,0.9);
+	border-radius: 4px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	outline: none;
+	box-sizing: border-box;
+	width: 100%;
+	font: 14px "Trebuchet MS", tahoma, arial;
+	color:#090;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+}
+
+#formulario .acao,
+#dnaformkt-trilha .acao{
+	width: 170px;
+	background: black;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 12px 0;
+	float: left;
+	text-align: center; 
+	margin-top: 20px;
+	border: none;
+}
+
+#formulario .acao:hover,
+#dnaformkt-trilha .acao:hover{
+	background: #0a1936;
+	cursor: pointer;
+}
+
+#formulario #progress,
+#dnaformkt-trilha #progress{
+	margin: 20px;
+	overflow: hidden;
+
+	/*cria contador armazenanda na variável step*/
+	counter-reset: step;
+}
+
+#formulario #progress li,
+#dnaformkt-trilha #progress li{
+	list-style-type: none;
+	color: black;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 10px;
+	float: left;
+	width: 25%;
+	position: relative;
+} 
+
+#formulario #progress li:before,
+#dnaformkt-trilha #progress li:before{
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	display: block;
+	line-height: 20px;
+	background: white;
+	color: #333;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	margin: 0 auto 10px auto;
+	text-align: center;
+	padding-bottom: 2px;
+}
+
+#formulario #progress li:after,
+#dnaformkt-trilha #progress li:after{
+	content: '';
+	width: 100%;
+	background: white;
+	height: 2px;
+	position: absolute;
+	top: 9px;
+	left: -50%;
+	z-index: -1;
+}
+
+#formulario #progress li:first-child:after,
+#dnaformkt-trilha #progress li:first-child:after{
+	content: none;
+}
+
+#formulario #progress li.ativo:before, #formulario #progress li.ativo:after,
+#dnaformkt-trilha #progress li.ativo:before, #dnaformkt-trilha #progress li.ativo:after{
+	background:black;
+	color: white;
+	text-shadow:0 1px 0;
+}
+
+.escolhas{margin: 10px 0;}
+.escolhas select{
+	border-radius: 2px;
+	padding: 5px 10px;
+	border: 1px solid #b2b2b2;
+	width: 100%;
+}
+.txt-center{
+	text-align: center!important;
+}
+/* topo do form*/
+.form-top{
+	display: flex;
+}
+.form-top img{
+	width: 120px;
+	margin: 0 auto 20px 0;
+}

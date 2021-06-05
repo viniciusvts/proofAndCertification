@@ -1,0 +1,39 @@
+$width: 200px;
+$height: $width/8; // altura é 1/5 da largura
+$primarycolor: white;
+$secondcolor: white;
+$bg: #4b4bf2;
+
+///div externa do relógio
+.watch {
+    width: $width;
+    height: $height;
+    display: flex;
+    border: solid $width/100 $secondcolor;
+    border-radius: $width/25;
+    padding: $width/40 $width/100;
+    background-color: $bg;
+    /// regras para todos os itens internos
+    .hour, .min, .sec {
+        width: $width/3;
+        height: $width/5;
+        color: $primarycolor;
+        font-size: $width/10;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    /// regras exceto para segundos
+    .min::before, .sec::before {
+        content: ":";
+        position: absolute;
+        margin-left: $width/-8;
+    }
+
+    //regras before
+    .hour::after, .min::after, .sec::after {
+        display: block;
+        font-size: $width/16.66666;
+        font-weight: normal;
+    }
+}

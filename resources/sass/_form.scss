@@ -1,0 +1,53 @@
+form{
+    input, label{
+        display: block;
+    }
+    label{
+        color: black;
+        font-size: 20px;
+        margin: 10px auto;
+    }
+    input{
+        width: 100%;
+        margin-bottom: 10px;
+        border: 1px solid $bg-1;
+        border-radius: 4px;
+        padding: 10px;
+        font-size: 14px;
+    }
+    &.test{
+        img{
+            &.delete, &.add{
+                height: 30px;
+                margin: 0 auto;
+                cursor: pointer;
+            }
+            &.add{
+                padding: 0 20px;
+                margin-top: -30px;
+            }
+        }
+        .question{
+            padding: 20px;
+            background-color: #ececec;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            position: relative;
+            .deletequestion{
+                position: absolute;
+                top: 15px;
+                right: 20px;
+                cursor: pointer;
+            }
+        }
+        .answer{
+            padding: 20px;
+            .item{
+                margin: 10px 0;
+            }
+        }
+    }
+}
+#newquestion{
+    cursor: pointer;
+}

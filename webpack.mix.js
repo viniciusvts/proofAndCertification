@@ -11,7 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.js('resources/js/jquery-1.11.0.min', 'public/js/')
+    .js('resources/js/functions', 'public/js/')
+    .js('resources/js/clock-countdown', 'public/js/')
+    .js('resources/js/testescript', 'public/js/');
+mix.sass('resources/sass/style.scss', 'public/css/style.css')
+    .sass('resources/sass/clock-countdown.scss', 'public/css/clock-countdown.css')
+    .options({
+       processCssUrls: false
+    });

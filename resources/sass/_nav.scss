@@ -1,0 +1,20 @@
+nav{
+	padding: 10px 0;
+	img{
+		&.logo{
+			height: 70px;
+		}
+	}
+	.actions{
+		ul{
+			display: flex;
+			list-style: none;
+			margin: auto 0 auto auto;
+			li{
+				font-size: 25px;
+				margin: 0 20px;
+				color: white;
+			}
+		}
+	}
+}

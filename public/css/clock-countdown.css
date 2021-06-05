@@ -1,0 +1,27 @@
+.watch {
+  width: 200px;
+  height: 25px;
+  display: flex;
+  border: solid 2px white;
+  border-radius: 8px;
+  padding: 5px 2px;
+  background-color: #4b4bf2;
+}
+.watch .hour, .watch .min, .watch .sec {
+  width: 66.6666666667px;
+  height: 40px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+.watch .min::before, .watch .sec::before {
+  content: ":";
+  position: absolute;
+  margin-left: -25px;
+}
+.watch .hour::after, .watch .min::after, .watch .sec::after {
+  display: block;
+  font-size: 12.0000048px;
+  font-weight: normal;
+}

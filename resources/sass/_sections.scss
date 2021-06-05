@@ -1,0 +1,20 @@
+.white-box{
+    background: #fdfdfd;
+    border: 0 none;
+    padding: 20px 50px;
+    border-radius: 30px;
+}
+.bg-base{
+    background: url(../img/layout-bg.jpg);
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+.bg-gradient{
+    background-image: linear-gradient(135deg, $bg-2, $bg-3);
+    min-height: 100vh;
+}
+.test-list{
+    margin-bottom: 20px;
+}

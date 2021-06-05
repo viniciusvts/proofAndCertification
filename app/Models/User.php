@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
     ];
 
     /**
@@ -40,4 +41,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+    * The roles that belong to the user.
+    */
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class)
+        ->as('usertest')
+        ->withPivot('is_approved')
+        ->withTimestamps();
+    }
 }

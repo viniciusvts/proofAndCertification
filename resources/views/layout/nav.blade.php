@@ -7,9 +7,9 @@
     </div>
     <div class="col d-flex actions">
       <ul>
-        @isset ($isAdmin)
+        @if ($isAdmin)
         <a href="{{route('test.create')}}"><li>Novo</li></a>
-        @endisset
+        @endif
         <a href="{{route('login.sair')}}"><li>Sair</li></a>
       </ul>
     </div>

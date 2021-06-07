@@ -10,13 +10,14 @@ use Auth;
 
 class TestController extends Controller
 {
-    public function test()
+    public function index()
     {
         if(!Auth::check()) return redirect()->route('login.index');
         $tests = Test::paginate(10);
         $user = Auth::user();
         $isAdmin = $user->type == 'admin';
         return view('test.index')
+            ->with('user', $user)
             ->with('tests', $tests)
             ->with('isAdmin', $isAdmin);
     }
@@ -27,7 +28,8 @@ class TestController extends Controller
         $user = Auth::user();
         $isAdmin = $user->type == 'admin';
         if($isAdmin){
-            return view('test.create');
+            return view('test.create')
+            ->with('isAdmin', $isAdmin);;
         }
         return redirect()->route('test.index');
     }
@@ -141,5 +143,88 @@ class TestController extends Controller
         // tudo ok? redireciona
         return redirect()->route('test.index');
         
+    }
+    
+    public function dotest($id)
+    {
+        if(!Auth::check()) return redirect()->route('login.index');
+        $user = Auth::user();
+        $isAdmin = $user->type == 'admin';
+        if($isAdmin) return redirect()->route('test.index');
+
+        $test = Test::find($id);
+        return view('test.dotest')
+        ->with('test', $test)
+        ->with('questionPerPage', 5)
+        ->with('user', $user)
+        ->with('isAdmin', $isAdmin);
+    }
+    
+    public function checkResults(Request $req, $id)
+    {
+        if(!Auth::check()) return redirect()->route('login.index');
+        $user = Auth::user();
+        $isAdmin = $user->type == 'admin';
+        if($isAdmin) return redirect()->route('test.index');
+
+        $dados = $req->all();
+        // já fez o teste antes?
+        $test = $user->tests()->find($id);
+        if($test){
+            // verifica se já fez o teste em menos de 24h
+            $lastAttempt = $test->pivot->updated_at->getTimestamp();
+            $atualDte = date('Y-m-d H:i:s');
+            $diferencaEntreDatasEmSegundos = strtotime($atualDte) - $lastAttempt;
+            $oneDayInSeconds = (60*60*24);
+            $diferenceInDays = $diferencaEntreDatasEmSegundos/$oneDayInSeconds;
+            // se a diferença entre as datas é menor que um dia (24h) exibir uma mensagem
+            if ($diferenceInDays < 1){
+                return view('message')
+                ->with('isAdmin', $isAdmin)
+                ->with('message', 'Você tem de esperar 24h para tentar novamente');
+            }
+        }
+        // remove o token das respostas
+        unset($dados['_token']);
+        // conta quantas questões certas
+        $questionsReceived = count($dados);
+        $questionsCorrect = 0;
+        foreach ($dados as $resp) {
+            $answer = Answer::find($resp);
+            if ($answer->isCorrect == 1){
+                $questionsCorrect++;
+            }
+        }
+        // verifica a percentagem de questões certas
+		$result = ($questionsCorrect / $questionsReceived) * 100;
+        // se passou
+		if($result >= 80){
+            // salva a relação com informações
+            if ($test){
+                $user->tests()->updateExistingPivot($id, ['is_approved' => true]);
+            } else {
+                $test = Test::find($id);
+                $user->tests()->attach($test, ['is_approved' => true]);
+            }
+        } else {
+            if ($test){
+                $user->tests()->updateExistingPivot($id, ['is_approved' => false]);
+            } else {
+                $test = Test::find($id);
+                $user->tests()->attach($test, [
+                    'is_approved' => false,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+            return view('message')
+            ->with('isAdmin', $isAdmin)
+            ->with('message', 'Você não foi aprovado! Nota: ' . round($result, 2));
+        }
+        return redirect()->route('test.getCertificate');
+    }
+
+    function getCertificate($id)
+    {
+        return 'o id é: ' . $id;
     }
 }

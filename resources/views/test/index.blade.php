@@ -3,22 +3,38 @@
   @include('layout.nav')
   <section class="container">
     @forelse ($tests as $test)
+    <?php
+    // se user já vez o teste e caso fez, se passou
+    $didTest = $user->tests()->find($test->id);
+    if ($didTest) {
+      $is_approved = $didTest->pivot->is_approved == 1;
+    }
+    ?>
     <div class="row test-list">
       <div class="col-12 white-box">
         <h3>{{ $test->title }}</h3>
         <div class="d-flex">
-          @isset ($isAdmin)
+          @if ($isAdmin)
           <form action="{{ route('test.destroy', ['id' => $test->id]) }}" method="POST">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE">
             <input type="submit" class="acao" value="Excluir">
           </form>
-          @endisset
-          @isset ($isAdmin)
+          @endif
+          @if (isset($is_approved) && $is_approved)
+          <a href="{{ route('test.getCertificate', ['id' => $test->id]) }}">
+            <button class="acao">Certificado</button>
+          </a>
+          @endif
+          @if ($isAdmin)
           <a href="{{ route('test.edit', ['id' => $test->id]) }}" class="ml-auto">
             <button class="acao">Editar</button>
           </a>
-          @endisset
+          @else
+          <a href="{{ route('test.do', ['id' => $test->id]) }}" class="ml-auto">
+            <button class="acao">Realizar Teste</button>
+          </a>
+          @endif
         </div>
       </div>
     </div>
@@ -32,7 +48,9 @@
   </section>
   <section class="container">
     <div class="row">
-      {{ $tests->links() }}
+      <div class="col">
+        {{ $tests->links('layout.pagination') }}
+      </div>
     </div>
   </section>
 </section>

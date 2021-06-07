@@ -2250,7 +2250,7 @@ a, a:hover {
 }
 
 nav {
-  padding: 10px 0;
+  padding: 20px 0;
 }
 nav img.logo {
   height: 70px;
@@ -2264,6 +2264,36 @@ nav .actions ul li {
   font-size: 25px;
   margin: 0 20px;
   color: white;
+}
+nav ul.pagination {
+  display: flex;
+  list-style: none;
+}
+nav ul.pagination li {
+  text-align: center;
+  padding: 12px 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  width: 45px;
+  background: white;
+  color: black;
+  margin: 0 5px;
+}
+nav ul.pagination li a {
+  color: black;
+}
+nav ul.pagination li.previous {
+  margin-right: auto;
+  width: 150px;
+}
+nav ul.pagination li.last {
+  margin-left: auto;
+  width: 150px;
+}
+nav ul.pagination li.disabled, nav ul.pagination li.active {
+  background: transparent;
+  border: 2px solid white;
 }
 
 .white-box {
@@ -2297,7 +2327,15 @@ h2, h3, h4 {
   font-weight: bold;
 }
 
-form input, form label {
+.err-resp {
+  color: white;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+form input, form label, form select {
   display: block;
 }
 form label {
@@ -2312,6 +2350,10 @@ form input {
   border-radius: 4px;
   padding: 10px;
   font-size: 14px;
+}
+form.test input[type=checkbox] {
+  width: 20px;
+  height: 20px;
 }
 form.test img.delete, form.test img.add {
   height: 30px;
@@ -2340,6 +2382,71 @@ form.test .answer {
 }
 form.test .answer .item {
   margin: 10px 0;
+}
+form.dotest fieldset {
+  display: none;
+}
+form.dotest fieldset.active {
+  display: block;
+}
+form.dotest label {
+  color: black;
+  font-size: 14px;
+  margin: 10px 0;
+  font: "Trebuchet", tahoma, arial;
+}
+form.dotest select {
+  border-radius: 2px;
+  padding: 5px 10px;
+  border: 1px solid #b2b2b2;
+  width: 100%;
+}
+
+.acao.disabled {
+  display: none;
+}
+
+.progress {
+  margin: 20px;
+  padding: 0;
+  overflow: hidden;
+  counter-reset: step;
+  display: flex;
+}
+.progress li {
+  list-style-type: none;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  width: 100%;
+  position: relative;
+}
+.progress li:after {
+  content: counter(step);
+  counter-increment: step;
+  width: 20px;
+  display: block;
+  line-height: 20px;
+  background: white;
+  color: #333;
+  border-radius: 10px;
+  text-align: center;
+  padding-bottom: 2px;
+  margin: auto;
+}
+.progress li:not(:first-child)::before {
+  content: "";
+  width: 100%;
+  background: white;
+  height: 2px;
+  position: absolute;
+  top: 9px;
+  left: -50%;
+  z-index: 0;
+}
+.progress li.ativo:after, .progress li.ativo:before {
+  background: black;
+  color: white;
 }
 
 #newquestion {

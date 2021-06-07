@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/jquery-1.11.0.min', 'public/js/')
+    .js('resources/js/dotest', 'public/js/')
     .js('resources/js/functions', 'public/js/')
     .js('resources/js/clock-countdown', 'public/js/')
     .js('resources/js/testescript', 'public/js/');

@@ -29,8 +29,10 @@ class Test extends Model
     /**
     * The roles that belong to the user.
     */
-   public function usersPassed()
+   public function users()
    {
-       return $this->belongsToMany(User::class);
+       return $this->belongsToMany(User::class)
+       ->withPivot('is_approved')
+       ->withTimestamps(false);
    }
 }

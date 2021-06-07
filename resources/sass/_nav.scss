@@ -1,5 +1,5 @@
 nav{
-	padding: 10px 0;
+	padding: 20px 0;
 	img{
 		&.logo{
 			height: 70px;
@@ -14,6 +14,44 @@ nav{
 				font-size: 25px;
 				margin: 0 20px;
 				color: white;
+			}
+		}
+	}
+	// layout.pagination
+	ul.pagination{
+		display: flex;
+		list-style: none;
+		li{
+			text-align: center;
+			padding: 12px 0;
+			text-transform: uppercase;
+			font-weight: bold;
+			font-size: 14px;
+			width: 45px;
+			background: white;
+			color: black;
+			margin: 0 5px;
+			a{
+				color: black;
+			}
+			// &:hover:not(.disabled,.active){
+			// 	background: black;
+			// 	color: white;
+			// 	a{
+			// 		color: white;
+			// 	}
+			// }
+			&.previous{
+				margin-right: auto;
+				width: 150px;
+			}
+			&.last{
+				margin-left: auto;
+				width: 150px;
+			}
+			&.disabled, &.active{
+				background: transparent;
+				border: 2px solid white;
 			}
 		}
 	}

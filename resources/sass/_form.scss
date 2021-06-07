@@ -1,5 +1,5 @@
 form{
-    input, label{
+    input, label, select{
         display: block;
     }
     label{
@@ -16,6 +16,10 @@ form{
         font-size: 14px;
     }
     &.test{
+        input[type=checkbox]{
+            width: 20px;
+            height: 20px;
+        }
         img{
             &.delete, &.add{
                 height: 30px;
@@ -47,6 +51,71 @@ form{
             }
         }
     }
+    &.dotest{
+        fieldset{
+            display: none;
+            &.active{
+                display: block;
+            }
+        }
+        label{
+            color: black;
+            font-size: 14px;
+            margin: 10px 0;
+            font: "Trebuchet", tahoma, arial;
+        }
+        select{
+            border-radius: 2px;
+            padding: 5px 10px;
+            border: 1px solid #b2b2b2;
+            width: 100%;
+        }
+    }
+}
+.acao.disabled{
+    display: none;
+}
+.progress{
+	margin: 20px;
+    padding: 0;
+	overflow: hidden;
+	counter-reset: step;
+    display: flex;
+    li{
+        list-style-type: none;
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+        width: 100%;
+        position: relative;
+        &:after{
+            content: counter(step);
+            counter-increment: step;
+            width: 20px;
+            display: block;
+            line-height: 20px;
+            background: white;
+            color: #333;
+            border-radius: 10px;
+            text-align: center;
+            padding-bottom: 2px;
+            margin: auto;
+        }
+        &:not(:first-child)::before{
+            content: '';
+            width: 100%;
+            background: white;
+            height: 2px;
+            position: absolute;
+            top: 9px;
+            left: -50%;
+            z-index: 0;
+        }
+        &.ativo:after, &.ativo:before{
+            background:black;
+            color: white;
+        }
+    } 
 }
 #newquestion{
     cursor: pointer;

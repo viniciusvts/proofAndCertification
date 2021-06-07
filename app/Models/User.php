@@ -47,8 +47,7 @@ class User extends Authenticatable
     */
     public function tests()
     {
-        return $this->belongsToMany(Test::class)
-        ->as('usertest')
+        return $this->belongsToMany(Test::class, 'usertests')
         ->withPivot('is_approved')
         ->withTimestamps();
     }

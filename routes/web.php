@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,18 @@ Route::get('/login',[LoginController::class, 'index'])->name('login.index');
 Route::post('/login',[LoginController::class, 'entrar'])->name('login.entrar');
 Route::get('/login/sair',[LoginController::class, 'sair'])->name('login.sair');
 
-Route::get('/testes',[TestController::class, 'test'])->name('test.index');
+Route::get('/testes',[TestController::class, 'index'])->name('test.index');
 Route::post('/testes',[TestController::class, 'store'])->name('test.store');
 Route::put('/testes/{id}',[TestController::class, 'update'])->name('test.update');
 Route::get('/testes/novo',[TestController::class, 'create'])->name('test.create');
-Route::get('/testes/{id}',[TestController::class, 'edit'])->name('test.edit');
+Route::get('/testes/editar/{id}',[TestController::class, 'edit'])->name('test.edit');
 Route::delete('/testes/{id}',[TestController::class, 'destroy'])->name('test.destroy');
+Route::get('/testes/fazer/{id}',[TestController::class, 'dotest'])->name('test.do');
+Route::post('/testes/resultado/{id}',[TestController::class, 'checkResults'])->name('test.checkresults');
+Route::get('/testes/resultado/{id}',[TestController::class, 'getCertificate'])->name('test.getCertificate');
+
+Route::get('/users/novo',[UserController::class, 'create'])->name('user.create');
+Route::post('/users',[UserController::class, 'store'])->name('user.store');
 
 // Route::group(['middleware'=>'auth'],function(){
     // Route::get('/tests/{test}', function (Test $test) {

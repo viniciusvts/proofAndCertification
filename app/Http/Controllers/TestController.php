@@ -199,7 +199,8 @@ class TestController extends Controller
 		$result = ($questionsCorrect / $questionsReceived) * 100;
         // se passou
 		if($result >= 80){
-            // salva a relação com informações
+            // se já fez o teste anteriormente atualiza a informação e pega a nova data
+            // se não fez anteriormente, salva a nova informação
             if ($test){
                 $user->tests()->updateExistingPivot($id, ['is_approved' => true]);
             } else {
@@ -207,9 +208,8 @@ class TestController extends Controller
                 $user->tests()->attach($test, ['is_approved' => true]);
             }
         } else {
-            if ($test){
-                $user->tests()->updateExistingPivot($id, ['is_approved' => false]);
-            } else {
+            // no caso de já ter feito o teste não atualiza, o certificado vai ser gerado com a data antiga
+            if (!$test){
                 $test = Test::find($id);
                 $user->tests()->attach($test, [
                     'is_approved' => false,
@@ -225,6 +225,29 @@ class TestController extends Controller
 
     function getCertificate($id)
     {
-        return 'o id é: ' . $id;
+        if(!Auth::check()) return redirect()->route('login.index');
+        $user = Auth::user();
+        $isAdmin = $user->type == 'admin';
+        if($isAdmin) return redirect()->route('test.index');
+        
+        $test = $user->tests()->find($id);
+        $lastAttempt = $test->pivot->updated_at->getTimestamp();
+        $basepath = base_path();
+
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->AddPage('L');
+        $stylesheet = file_get_contents($basepath . '/resources/certificate/style.css');
+        $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
+        $html = '
+            <h1 style="margin-collapse: none; margin-top: 80mm; text-align: center">'.
+            strtoupper($user->name).'</h1>
+            <h2 style="margin-collapse: none; margin-top: 14mm; text-align: center">'.
+            $test->title.'</h2>'.
+            '<h2 style="margin-collapse: none; margin-top: 15mm; text-align: center">'.
+            date("d/m/Y", $lastAttempt).'</h2>
+        ';
+        $mpdf->WriteHTML($html, \Mpdf\HTMLParserMode::HTML_BODY);
+        $mpdf->SetTitle($test->title);
+        return $mpdf->Output('certificado-dna-de-vendas.pdf',"I");
     }
 }

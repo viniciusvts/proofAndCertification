@@ -1,0 +1,19 @@
+		body{
+			font-family: DejaVuSansCondensed, sans-serif; font-size: 11pt;
+			background: url("./img/certificado-formkt.jpg");
+			background-size: cover;
+			background-repeat: no-repeat;
+						
+		}
+		p { text-align: justify; margin-bottom: 4pt;  margin-top:0pt; }
+
+		hr{
+			width: 70%; height: 1px; 
+			text-align: center; color: #999999; 
+			margin-top: 8pt; margin-bottom: 8pt;
+		}
+		h5 {
+			font-weight: bold; font-style:italic; ; font-size: 11pt; color: #900; 
+			font-family: DejaVuSansCondensed, sans-serif; text-align: center;
+		}
+

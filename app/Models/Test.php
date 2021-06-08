@@ -16,6 +16,7 @@ class Test extends Model
      */
     protected $attributes = [
         'title' => 'Titulo',
+        'time_to_finish' => 60,
     ];
 
     /**
@@ -33,6 +34,6 @@ class Test extends Model
    {
        return $this->belongsToMany(User::class)
        ->withPivot('is_approved')
-       ->withTimestamps(false);
+       ->withTimestamps();
    }
 }

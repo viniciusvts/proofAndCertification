@@ -30,6 +30,7 @@ class UserController extends Controller
             'password' => bcrypt($pass),
             'type' => 'user'
         ]);
+        $user->save();
         // tudo ok? redireciona
         return redirect()->route('login.index');
     }

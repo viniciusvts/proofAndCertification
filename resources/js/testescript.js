@@ -18,6 +18,7 @@
      */
     function load(evt) {
         startTesteFormScript();
+        startModalEvents();
     }
     /**
      * inicia as ações que acontecem no formulário de inserção/edição de testes
@@ -190,6 +191,18 @@
         var allItens = answerDiv.querySelectorAll('.item');
         if(allItens.length <= 2) return alert('Cada questão deve ter ao menos duas opções');
         answerDiv.removeChild(thisItem);
+    }
+
+    function startModalEvents(){
+        var openModalButton = querySelector('#openconfig');
+        var fecharModalButton = querySelector('#fechar');
+        var modalDiv = querySelector('#testconfig');
+        openModalButton.addEventListener('click', ()=>{
+            modalDiv.classList.add('active');
+        })
+        fecharModalButton.addEventListener('click', ()=>{
+            modalDiv.classList.remove('active');
+        })
     }
     
 })(window, document, console, x=>document.querySelector(x), x=>document.querySelectorAll(x));

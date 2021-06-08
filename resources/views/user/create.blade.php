@@ -8,8 +8,8 @@
           <h4>Login: Certificação Trilha de aprendizagem</h4>
           <p>Insira corretamente seus dados</p>
           {{ csrf_field() }}
-          <input type="text" placeholder="Nome" name="name">
-          <input type="email" placeholder="Email" name="email">
+          <input type="text" placeholder="Nome" name="name" required>
+          <input type="email" placeholder="Email" name="email" required>
           <input type="submit" name="submit" class="acao" value="Cadastrar"/>
           <a href="{{ route('login.index') }}">
             <input type="text" class="acao" value="Voltar" style="float: right"/>

@@ -2225,7 +2225,7 @@ a, a:hover {
 }
 
 .f-right {
-  float: right;
+  float: right !important;
 }
 
 .m-auto {
@@ -2247,6 +2247,48 @@ a, a:hover {
 .my-0 {
   margin-top: 0;
   margin-bottom: 0;
+}
+
+[data-tip] {
+  position: relative;
+}
+
+[data-tip]:before {
+  content: "";
+  display: none;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #1a1a1a;
+  position: absolute;
+  top: 30px;
+  left: 35px;
+  z-index: 8;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+}
+
+[data-tip]:after {
+  display: none;
+  content: attr(data-tip);
+  position: absolute;
+  top: 35px;
+  left: 0px;
+  padding: 5px 8px;
+  background: #1a1a1a;
+  color: #fff;
+  z-index: 9;
+  font-size: 0.75em;
+  line-height: 18px;
+  border-radius: 3px;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+[data-tip]:hover:before,
+[data-tip]:hover:after {
+  display: block;
 }
 
 nav {
@@ -2364,6 +2406,34 @@ form.test img.add {
   padding: 0 20px;
   margin-top: -30px;
 }
+form.test .modal {
+  display: none;
+  background-color: #00000055;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+form.test .modal.active {
+  display: flex;
+}
+form.test .modal .internal {
+  width: 80%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 50px auto;
+  background-color: white;
+  padding: 10px;
+}
+@media (min-width: 767.98px) {
+  form.test .modal .internal {
+    width: 50%;
+    padding: 50px;
+  }
+}
 form.test .question {
   padding: 20px;
   background-color: #ececec;
@@ -2400,6 +2470,12 @@ form.dotest select {
   padding: 5px 10px;
   border: 1px solid #b2b2b2;
   width: 100%;
+}
+
+.config {
+  width: 30px;
+  float: right;
+  cursor: pointer;
 }
 
 .acao.disabled {

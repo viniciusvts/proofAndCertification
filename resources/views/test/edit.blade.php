@@ -4,12 +4,21 @@
   <section class="container">
     <div class="row">
       <div class="col-12 white-box">
+        <img src="/img/gear.svg" alt="configuração" class="config" id="openconfig">
         <h2 class="text-center">Editar teste</h2>
         <form id="test" name="test" class="test" action="{{ route('test.update', ['id' => $test->id]) }}" method="post">
           {{ csrf_field() }}
           <input type="hidden" name="_method" value="PUT">
           <label for="title">Título</label>
           <input type="text" name="title" id="title" value="{{ $test->title }}" required>
+          <div class="modal" id="testconfig">
+            <div class="internal">
+              <label for="time_to_finish"
+              data-tip="Tempo em minutos de duração máxima do teste">Tempo para termino em minutos</label>
+              <input type="number" name="time_to_finish" id="time_to_finish" step="1" min="0" value="60">
+              <a href="#_" class="acao f-right" id="fechar">Fechar</a>
+            </div>
+          </div>
           <?php
           $questions = $test->questions;
           foreach($questions as $qkey => $question){

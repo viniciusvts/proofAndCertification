@@ -2,6 +2,15 @@
 
 Sistema para aplicar prova online e gerar o certificado de aprovação do aluno.
 
+## Crie usuários
+
+Criar usuário admin:
+
+    php artisan make:adminuser
+
+Cria usuário comum:
+
+    php artisan make:user
 ## Telas
 
 Tela de login

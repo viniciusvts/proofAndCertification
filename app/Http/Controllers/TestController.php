@@ -46,6 +46,7 @@ class TestController extends Controller
         // criamos o novo teste
         $test = new Test;
         $test->title = $dados['title'];
+        $test->time_to_finish = $dados['time_to_finish'];
         $test->save();
         foreach ($dados['question'] as $q) {
             $question = new Question;
@@ -86,6 +87,7 @@ class TestController extends Controller
         // agora lança os novos dados
         $dados = $req->all();
         $test->title = $dados['title'];
+        $test->time_to_finish = $dados['time_to_finish'];
         $test->save();
         foreach ($dados['question'] as $q) {
             $question = new Question;
@@ -151,6 +153,23 @@ class TestController extends Controller
         $user = Auth::user();
         $isAdmin = $user->type == 'admin';
         if($isAdmin) return redirect()->route('test.index');
+
+        // já fez o teste antes?
+        $test = $user->tests()->find($id);
+        if($test){
+            // verifica se já fez o teste em menos de 24h
+            $lastAttempt = $test->pivot->updated_at->getTimestamp();
+            $atualDte = date('Y-m-d H:i:s');
+            $diferencaEntreDatasEmSegundos = strtotime($atualDte) - $lastAttempt;
+            $oneDayInSeconds = (60*60*24);
+            $diferenceInDays = $diferencaEntreDatasEmSegundos/$oneDayInSeconds;
+            // se a diferença entre as datas é menor que um dia (24h) exibir uma mensagem
+            if ($diferenceInDays < 1){
+                return view('message')
+                ->with('isAdmin', $isAdmin)
+                ->with('message', 'Você tem de esperar 24h para tentar novamente');
+            }
+        }
 
         $test = Test::find($id);
         return view('test.dotest')
@@ -220,7 +239,7 @@ class TestController extends Controller
             ->with('isAdmin', $isAdmin)
             ->with('message', 'Você não foi aprovado! Nota: ' . round($result, 2));
         }
-        return redirect()->route('test.getCertificate');
+        return redirect()->route('test.getCertificate', ['id' => $id]);
     }
 
     function getCertificate($id)

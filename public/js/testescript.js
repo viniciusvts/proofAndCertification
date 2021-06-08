@@ -31,6 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   function load(evt) {
     startTesteFormScript();
+    startModalEvents();
   }
   /**
    * inicia as ações que acontecem no formulário de inserção/edição de testes
@@ -284,6 +285,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var allItens = answerDiv.querySelectorAll('.item');
     if (allItens.length <= 2) return alert('Cada questão deve ter ao menos duas opções');
     answerDiv.removeChild(thisItem);
+  }
+
+  function startModalEvents() {
+    var openModalButton = querySelector('#openconfig');
+    var fecharModalButton = querySelector('#fechar');
+    var modalDiv = querySelector('#testconfig');
+    openModalButton.addEventListener('click', function () {
+      modalDiv.classList.add('active');
+    });
+    fecharModalButton.addEventListener('click', function () {
+      modalDiv.classList.remove('active');
+    });
   }
 })(window, document, console, function (x) {
   return document.querySelector(x);

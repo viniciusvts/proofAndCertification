@@ -210,7 +210,7 @@ class TestController extends Controller
         $questionsCorrect = 0;
         foreach ($dados as $resp) {
             $answer = Answer::find($resp);
-            if ($answer->isCorrect == 1){
+            if (isset($answer) && $answer->isCorrect == 1){
                 $questionsCorrect++;
             }
         }

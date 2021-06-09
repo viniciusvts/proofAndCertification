@@ -1,12 +1,14 @@
 @include('layout.head')
 <section class="bg-base">
   @include('layout.nav')
+  @include('layout.clock-countdown')
   <section class="container">
     <div class="row test-list">
       <div class="col-12 col-md-8 mx-auto white-box">
         <h4 class="text-center">Boa sorte {{ $user->name }}</h4>
         <h3 class="text-center">{{ $test->title }}</h3>
-        <form action="{{ route('test.checkresults', ['id' => $test->id]) }}" method="post" class="dotest" id="dotest">
+        <form action="{{ route('test.checkresults', ['id' => $test->id]) }}"
+        method="post" class="dotest" id="dotest">
           {{ csrf_field() }}
           <fieldset class="active">
             @forelse ($test->questions as $question)

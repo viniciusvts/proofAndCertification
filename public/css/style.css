@@ -2510,16 +2510,6 @@ form.dotest select {
   padding-bottom: 2px;
   margin: auto;
 }
-.progress li:not(:first-child)::before {
-  content: "";
-  width: 100%;
-  background: white;
-  height: 2px;
-  position: absolute;
-  top: 9px;
-  left: -50%;
-  z-index: 0;
-}
 .progress li.ativo:after, .progress li.ativo:before {
   background: black;
   color: white;

@@ -1,6 +1,15 @@
+.watch-container {
+  position: absolute;
+  top: 25px;
+  width: 100%;
+}
+.watch-container .watch-row {
+  height: 0;
+}
+
 .watch {
   width: 200px;
-  height: 25px;
+  height: 50px;
   display: flex;
   border: solid 2px white;
   border-radius: 8px;

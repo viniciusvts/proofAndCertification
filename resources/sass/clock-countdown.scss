@@ -1,10 +1,18 @@
 $width: 200px;
-$height: $width/8; // altura é 1/5 da largura
+$height: $width/4; // altura é 1/5 da largura
 $primarycolor: white;
 $secondcolor: white;
 $bg: #4b4bf2;
 
 ///div externa do relógio
+.watch-container{
+    position: absolute;
+    top: 25px;
+    width: 100%;
+    .watch-row{
+        height: 0;
+    }
+}
 .watch {
     width: $width;
     height: $height;

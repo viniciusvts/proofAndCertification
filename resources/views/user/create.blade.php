@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-8 mx-auto white-box">
         <form id="dnaformkt-trilha" method="post" action="{{route('user.store')}}" name="dnaformkt-trilha" class="test">
-          <h4>Login: Certificação Trilha de aprendizagem</h4>
+          <h4>Novo usuário: Certificação</h4>
           <p>Insira corretamente seus dados</p>
           {{ csrf_field() }}
           <input type="text" placeholder="Nome" name="name" required>

@@ -17,9 +17,8 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
     return redirect('login');
-});
+})->name('index');
 // login
 Route::get('/login',[LoginController::class, 'index'])->name('login.index');
 Route::post('/login',[LoginController::class, 'entrar'])->name('login.entrar');

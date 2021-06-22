@@ -16,11 +16,14 @@ class LoginController extends Controller
     {
         $dados = $req->all();
         $remember = isset($dados['remember']);
-        if(Auth::attempt(['email'=>$dados['email'],'password'=>$dados['senha']], $remember)){
-            return redirect()->route('test.index');
+        if(isset($dados['email']) && isset($dados['senha'])){
+            if(Auth::attempt(['email'=>$dados['email'],'password'=>$dados['senha']], $remember)){
+                return redirect()->route('test.index');
+            }
         }
-        return view('login.index')
-            ->with('isIncorrectCredencials', true);
+        // if not, bad request
+        return response()
+            ->view('login.index',['isIncorrectCredencials' => true], 400);
     }
     public function sair()
     {

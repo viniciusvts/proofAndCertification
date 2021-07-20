@@ -13,7 +13,7 @@
     <div class="row test-list">
       <div class="col-12 white-box">
         <h3>{{ $test->title }}</h3>
-        <p>{{ count($test->questions) }} questôes, {{ $test->time_to_finish }} minutos para concluir.</p>
+        <p>{{ count($test->questions) }} questões, {{ $test->time_to_finish }} minutos para concluir.</p>
         <div class="d-flex">
           @if ($isAdmin)
           <form action="{{ route('test.destroy', ['id' => $test->id]) }}" method="POST">

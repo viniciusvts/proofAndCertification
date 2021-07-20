@@ -237,7 +237,7 @@ class TestController extends Controller
             }
             return view('message')
             ->with('isAdmin', $isAdmin)
-            ->with('message', 'Você não foi aprovado! Nota: ' . round($result, 2));
+            ->with('message', 'Você não foi aprovado! Nota: ' . round($result, 2) . '%');
         }
         return redirect()->route('test.getCertificate', ['id' => $id]);
     }

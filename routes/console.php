@@ -39,8 +39,8 @@ Artisan::command('make:adminuser', function () {
 
 Artisan::command('make:user', function () {
     // solicita no console dados para o novo user
-    $email = $this->ask('Digite um e-mail');
     $name = $this->ask('Digite o nome');
+    $email = $this->ask('Digite um e-mail');
     $password = $this->secret('Digite a senha');
     // procura no banco  se já tem email cadastrado
     // caso negativo cria um novo

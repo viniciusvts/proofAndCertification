@@ -12,7 +12,7 @@
           {{ csrf_field() }}
           <fieldset class="active">
             @forelse ($test->questions as $question)
-              <label for="{{ $question->id }}">{{ $question->statement }}</label>
+              <label for="{{ $question->id }}"><?php echo $question->statement; ?></label>
               <select name="{{ $question->id }}" id="" required>
                 <option value="">Escolha uma opção</option>
                 @foreach ($question->answers as $answer)

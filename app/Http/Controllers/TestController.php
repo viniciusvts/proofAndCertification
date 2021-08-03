@@ -158,7 +158,7 @@ class TestController extends Controller
         $test = $user->tests()->find($id);
         if($test){
             // verifica se já fez o teste em menos de 24h
-            $lastAttempt = $test->pivot->updated_at->getTimestamp();
+            $lastAttempt = $test->pivot->updated_at->timestamp;
             $atualDte = date('Y-m-d H:i:s');
             $diferencaEntreDatasEmSegundos = strtotime($atualDte) - $lastAttempt;
             $oneDayInSeconds = (60*60*24);

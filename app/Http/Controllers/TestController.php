@@ -235,11 +235,15 @@ class TestController extends Controller
                     'updated_at' => date('Y-m-d H:i:s')
                 ]);
             }
+            // se não aprovado
             return view('message')
             ->with('isAdmin', $isAdmin)
             ->with('message', 'Você não foi aprovado! Nota: ' . round($result, 2) . '%');
         }
-        return redirect()->route('test.getCertificate', ['id' => $id]);
+        // se aprovado
+        return view('message')
+        ->with('isAdmin', $isAdmin)
+        ->with('message', 'Você foi aprovado! Nota: ' . round($result, 2) . '%');
     }
 
     function getCertificate($id)

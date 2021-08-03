@@ -254,6 +254,16 @@ class TestController extends Controller
         if($isAdmin) return redirect()->route('test.index');
         
         $test = $user->tests()->find($id);
+        // se não fez o teste ou não foi aprovado retorna uma mensagem
+        if (!$test){
+            return view('message')
+            ->with('isAdmin', $isAdmin)
+            ->with('message', 'Você ainda não fez este teste.');
+        } else if ($test->pivot->is_approved != 1){
+            return view('message')
+            ->with('isAdmin', $isAdmin)
+            ->with('message', 'Você ainda não foi aprovado neste teste.');
+        }
         $lastAttempt = $test->pivot->updated_at->getTimestamp();
         $basepath = base_path();
 

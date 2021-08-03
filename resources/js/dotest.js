@@ -51,8 +51,8 @@
                             progItem.classList.remove('ativo');
                         }
                     }
-                     // se não há elemento anterior, desativo o prev button
-                    if(!elemAnterior.previousElementSibling){
+                     // se elemento anterior não é fildset, desativo o prev button
+                    if(elemAnterior.previousElementSibling.tagName !== 'FIELDSET'){
                         var prevButton = querySelector('#prev');
                         prevButton.classList.add('disabled');
                     }

@@ -3,13 +3,6 @@
   @include('layout.nav')
   <section class="container">
     @forelse ($tests as $test)
-    <?php
-    // se user já vez o teste e caso fez, se passou
-    $didTest = $user->tests()->find($test->id);
-    if ($didTest) {
-      $is_approved = $didTest->pivot->is_approved == 1;
-    }
-    ?>
     <div class="row test-list">
       <div class="col-12 white-box">
         <h3>{{ $test->title }}</h3>
@@ -22,11 +15,17 @@
             <input type="submit" class="acao" value="Excluir">
           </form>
           @endif
-          @if (isset($is_approved) && $is_approved)
+          <?php
+          // se user já vez o teste e caso fez, se passou
+          $didTest = $user->tests()->find($test->id);
+          if ($didTest && $didTest->pivot->is_approved == 1) {
+          ?>
           <a href="{{ route('test.getCertificate', ['id' => $test->id]) }}">
             <button class="acao">Certificado</button>
           </a>
-          @endif
+          <?php
+          }
+          ?>
           @if ($isAdmin)
           <a href="{{ route('test.edit', ['id' => $test->id]) }}" class="ml-auto">
             <button class="acao">Editar</button>
